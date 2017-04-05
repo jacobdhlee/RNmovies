@@ -6,14 +6,20 @@ import {
 } from 'react-native';
 import { connect, Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import createLogger from 'redux-logger';
+import { createLogger } from 'redux-logger';
+import thunk from 'redux-thunk';
+
+import reducers from './src/reducers';
+import Main from './src/components/Main';
 
 export default class App extends React.Component {
   render() {
+    const logger = createLogger();
+    const store = createStore(reducers, {}, applyMiddleware(logger, thunk))
     return (
-      <View style={styles.container}>
-        <Text>Should be the first component</Text>
-      </View>
+      <Provider store={store}>
+        <Main />
+      </Provider>
     );
   }
 }
