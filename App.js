@@ -11,6 +11,7 @@ import thunk from 'redux-thunk';
 
 import reducers from './src/reducers';
 import Main from './src/components/Main';
+import { MainStack } from './src/Routes';
 
 export default class App extends React.Component {
   render() {
@@ -18,7 +19,7 @@ export default class App extends React.Component {
     const store = createStore(reducers, {}, applyMiddleware(logger, thunk))
     return (
       <Provider store={store}>
-        <Main />
+        <MainStack />
       </Provider>
     );
   }

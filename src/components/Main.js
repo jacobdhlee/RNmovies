@@ -28,7 +28,7 @@ class Main extends Component {
     return (
       <View style={styles.contianer}>
         <Header title={'Movies'} />
-        <View>
+        <View style={styles.bodyContainer}>
           <View>
             <Text>Movie</Text>
           </View>
@@ -46,6 +46,9 @@ class Main extends Component {
 
 const styles = StyleSheet.create({
   contianer: {
+    flex: 1,
+  },
+  bodyContainer: {
     flex: 1,
   }
 })
