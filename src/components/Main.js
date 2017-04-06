@@ -6,7 +6,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import { getMovieList } from '../actions'
+import { getMovieList } from '../actions';
+import api from '../../config/config';
 
 @connect(({movieList}) => {
   return {
@@ -17,14 +18,15 @@ import { getMovieList } from '../actions'
 class Main extends Component {
 
   componentWillMount() {
-    this.props.dispatch(getMovieList('hahahah I love movie'))
+    this.props.dispatch(getMovieList(api.key))
   }
 
   render() {
     const { movieList } = this.props;
+    console.log('movieList ?????>>>>?? ', movieList)
     return (
       <View style={styles.contianer}>
-        <Text>{movieList.movies}</Text>
+        <Text>{movieList.movieList.homepage}</Text>
       </View>
     )
   }
