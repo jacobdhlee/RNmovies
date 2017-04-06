@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 
 import { getMovieList } from '../actions';
 import api from '../../config/config';
+import Header from './common/Header';
 
 @connect(({movieList}) => {
   return {
@@ -26,7 +27,18 @@ class Main extends Component {
     console.log('movieList ?????>>>>?? ', movieList)
     return (
       <View style={styles.contianer}>
-        <Text>{movieList.movieList.homepage}</Text>
+        <Header title={'Movies'} />
+        <View>
+          <View>
+            <Text>Movie</Text>
+          </View>
+
+          <View>
+            <Text>TV</Text>
+          </View>
+
+
+        </View>
       </View>
     )
   }
@@ -35,7 +47,6 @@ class Main extends Component {
 const styles = StyleSheet.create({
   contianer: {
     flex: 1,
-    justifyContent: 'center',
   }
 })
 
