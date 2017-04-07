@@ -5,14 +5,14 @@ import {
 } from '../actions/types'
 
 const INITIAL_STATE = {
-  movieList: {},
+  movies: [],
   error: '',
 }
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LOADING_LIST_SUCCESS:
-      return { ...state, movieList: action.payload }
+      return { ...state, movies: [...action.payload.results] }
     
     case LOADING_LIST_FAIL:
       return { ...state, error: action.payload }

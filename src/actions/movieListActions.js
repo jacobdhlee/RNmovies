@@ -6,10 +6,9 @@ import {
 
 export const getMovieList = (api) => {
   return (dispatch) => {
-    fetch(`https://api.themoviedb.org/3/movie/550?api_key=${api}`)
+    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${api}`)
       .then(res => res.json())
       .then(data => {
-        console.log('data is >>>>> ', data)
         dispatch({
           type: LOADING_LIST_SUCCESS,
           payload: data,
