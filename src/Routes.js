@@ -14,7 +14,8 @@ const ListTabConfig = {
       fontSize: 15,
     },
     style: {
-      height: 25,
+      height: 30,
+      alignItems: 'center',
     },
   }
 }

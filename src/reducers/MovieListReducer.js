@@ -2,10 +2,12 @@ import {
   MOVIELIST,
   LOADING_LIST_FAIL,
   LOADING_LIST_SUCCESS,
+  LOADING_TVLIST_SUCCESS
 } from '../actions/types'
 
 const INITIAL_STATE = {
   movies: [],
+  tvs: [],
   error: '',
 }
 
@@ -16,6 +18,9 @@ export default (state = INITIAL_STATE, action) => {
     
     case LOADING_LIST_FAIL:
       return { ...state, error: action.payload }
+    
+    case LOADING_TVLIST_SUCCESS:
+      return { ...state, tvs: [...action.payload.results]  }
       
     default:
       return { ...INITIAL_STATE }

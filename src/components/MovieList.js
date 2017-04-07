@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { getMovieList } from '../actions';
+import { getMovieList, getTVList } from '../actions';
 import api from '../../config/config';
 
 import Row from './common/Row';
@@ -22,6 +22,7 @@ class MovieList extends Component {
 
   componentWillMount() {
     this.props.dispatch(getMovieList(api.key))
+    this.props.dispatch(getTVList(api.key))
   }
 
   render() {
@@ -50,7 +51,6 @@ class MovieList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lightyellow',
   }
 })
 
