@@ -4,12 +4,15 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
-
+import Header from './common/Header'
 class Likes extends Component {
   render() {
+    // console.log('this props ', this.props.navigation.state.routeName)
     return (
       <View style={styles.container}>
-        <Text>Movie List</Text>
+        <View>
+          <Text>Movie List</Text>
+        </View>
       </View>
     )
   }

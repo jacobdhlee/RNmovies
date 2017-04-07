@@ -10,10 +10,10 @@ import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 
 import reducers from './src/reducers';
-import Main from './src/components/Main';
 import { MainStack } from './src/Routes';
 
 export default class App extends React.Component {
+
   render() {
     const logger = createLogger();
     const store = createStore(reducers, {}, applyMiddleware(logger, thunk))

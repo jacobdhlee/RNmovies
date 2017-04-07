@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
 import MovieList from './components/MovieList'
@@ -9,11 +9,19 @@ import Likes from './components/Likes'
 const ListTabConfig = {
   tabBarPosition: 'top',
   swipeEnabled: true,
-  animationEnabled: true,
+  tabBarOptions: {
+    labelStyle: {
+      fontSize: 15,
+    },
+    style: {
+      height: 25,
+    },
+  }
 }
 
 export const ListStack = TabNavigator({
   Movie: {
+    title: 'Lists!',
     screen: MovieList,
     navigationOptions: {
       tabBar: {
@@ -31,8 +39,8 @@ export const ListStack = TabNavigator({
   }
 }, ListTabConfig)
 
-export const MainStack = TabNavigator({
-  Main: {
+export const MainTabStack = TabNavigator({
+  List: {
     screen: ListStack,
     navigationOptions: {
       tabBar: {
@@ -47,6 +55,24 @@ export const MainStack = TabNavigator({
       tabBar: {
         lable: 'Love',
         icon: ({ tintColor }) => <Icon name="favorite-border" size={30} color={tintColor}/>
+      }
+    }
+  }
+})
+
+export const MainStack = StackNavigator({
+  List: {
+    screen: MainTabStack,
+    navigationOptions: {
+      header: ({navigate, state, setParams, dispatch}) => {
+        const { index, routes } = state
+        const mainRouteName = routes[index].routeName
+        const subTabIndex = routes[index].index
+        const subTabRoutes = routes[0].routes
+        const tabName = subTabIndex === undefined ? '' : subTabRoutes[subTabIndex].routeName
+        return { 
+          title: `${tabName} ${mainRouteName}`
+        }
       }
     }
   }
