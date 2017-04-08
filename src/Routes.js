@@ -2,9 +2,10 @@ import React from 'react';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
-import MovieList from './components/MovieList'
-import TVList from './components/TVList'
-import Likes from './components/Likes'
+import MovieList from './components/MovieList';
+import TVList from './components/TVList';
+import Likes from './components/Likes';
+import Search from './components/Search';
 
 const ListTabConfig = {
   tabBarPosition: 'top',
@@ -50,6 +51,17 @@ export const MainTabStack = TabNavigator({
       }
     }
   },
+
+  Search: {
+    screen: Search,
+    navigationOptions: {
+      tabBar: {
+        lable: 'Search',
+        icon: ({ tintColor }) => <Icon name="search" size={30} color={tintColor}/>
+      }
+    }
+  },
+
   Love: {
     screen: Likes,
     navigationOptions: {
