@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  ScrollView,
 } from 'react-native';
 import { connect } from 'react-redux'
-import { SearchBar } from 'react-native-elements';
+import { SearchBar, List } from 'react-native-elements';
 import { searchInput, searchSubmit } from '../actions'
 import api from '../../config/config';
+import Row from './common/Row';
 
 @connect((store) => {
   return {
@@ -35,6 +37,8 @@ class Search extends Component {
 
   render() {
     const { movieList } = this.props.store;
+    console.log('movieList is ', movieList.searchList)
+    const movies = movieList.searchList;
     return (
       <View>
         <SearchBar
@@ -44,6 +48,19 @@ class Search extends Component {
           value={movieList.search}
           blurOnSubmit={true}
           onSubmitEditing={this.searchSubmit}/>
+        <List>
+          <ScrollView>
+            {
+              movies.map((movie) => (
+                <Row 
+                  key={movie.id}
+                  uri={ movie.poster_path}
+                  title={movie.original_title}
+                />
+              ))
+            }
+          </ScrollView>
+        </List>
       </View>
     )
   }
