@@ -5,6 +5,8 @@ import {
   LOADING_TVLIST_SUCCESS,
   SEARCH_INPUT,
   SEARCH_SUBMIT_SUCCESS,
+  FAVORITE_ADD,
+  FAVORITE_REMOVIE,
 } from './types'
 
 export const getMovieList = (api) => {
@@ -68,5 +70,12 @@ export const searchSubmit = (text, api) => {
           payload: err
         })
       })
+  }
+}
+
+export const favoritAdd = (favorite) => {
+  return {
+    type: FAVORITE_ADD,
+    payload: favorite
   }
 }

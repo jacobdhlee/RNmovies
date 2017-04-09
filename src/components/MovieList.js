@@ -27,17 +27,19 @@ class MovieList extends Component {
 
   render() {
     const { movies } = this.props.movieList
-    console.log('movie list is ', movies.length)
+    const favColor = 'rgba(254,254,254,0.5)'
     return (
       <View style={styles.container}>
         <ScrollView>
           <List>
             {
               movies.map((movie) => (
-                <Row 
+                <Row
                   key={movie.id}
                   uri={ movie.backdrop_path}
                   title={movie.original_title}
+                  color={favColor}
+                  id={movie}
                 />
               ))
             }
