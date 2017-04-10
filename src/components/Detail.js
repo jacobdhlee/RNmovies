@@ -22,10 +22,20 @@ const { width, height } = Dimensions.get('window');
 })
 class Detail extends Component {
 
+  constructor() {
+    super()
+
+    this.showDetail = this.showDetail.bind(this);
+  }
+
   componentWillMount() {
     const { id, title } = this.props.navigation.state.params;
     title ? this.props.dispatch(similarMovieSearch(id, api.key)) : this.props.dispatch(similarTVSearch(id, api.key))
 
+  }
+
+  showDetail(show) {
+    this.props.navigation.navigate('Detail', show)
   }
 
   render() {
@@ -61,7 +71,8 @@ class Detail extends Component {
         <List containerStyle={{flexDirection: 'row', flexWrap: 'wrap'}}>
           {
             similar.map((show) => (
-              <ShowSimilar 
+              <ShowSimilar
+                onPress={() => this.showDetail(show)}
                 key={show.id}
                 title={show.title}
                 uri={ show.poster_path}
