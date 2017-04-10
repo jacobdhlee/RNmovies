@@ -5,11 +5,15 @@ import {
   StyleSheet,
   ScrollView,
   Image,
+  Dimensions,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { similarMovieSearch, similarTVSearch } from '../actions'
 import { Icon, List } from 'react-native-elements'
 import api from '../../config/config';
+import ShowSimilar from './ShowSimilar';
+
+const { width, height } = Dimensions.get('window');
 
 @connect((store) => {
   return {
@@ -28,7 +32,7 @@ class Detail extends Component {
     const { 
       poster_path, overview, release_date, title, vote_average, first_air_date, name
     } = this.props.navigation.state.params
-    const { movieList } = this.props.store;
+    const { similar } = this.props.store.movieList;
     const titles = title ? title : name
     const release = release_date ? release_date.split('-') : first_air_date.split('-')
     return (
@@ -54,8 +58,17 @@ class Detail extends Component {
         <View>
           <Text>Simular</Text>
         </View>
-        <List>
-
+        <List containerStyle={{flexDirection: 'row', flexWrap: 'wrap'}}>
+          {
+            similar.map((show) => (
+              <ShowSimilar 
+                key={show.id}
+                title={show.title}
+                uri={ show.poster_path}
+                name={show.name}
+              />
+            ))
+          }
         </List>
       </ScrollView>
     )
