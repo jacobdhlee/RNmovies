@@ -20,9 +20,18 @@ import Row from './common/Row';
 
 class MovieList extends Component {
 
+  constructor() {
+    super()
+    this.showMovieDetail = this.showMovieDetail.bind(this);
+  }
+
   componentWillMount() {
     this.props.dispatch(getMovieList(api.key))
     this.props.dispatch(getTVList(api.key))
+  }
+
+  showMovieDetail(movie) {
+    this.props.navigation.navigate('Detail', movie)
   }
 
   render() {
@@ -40,6 +49,7 @@ class MovieList extends Component {
                   title={movie.original_title}
                   color={favColor}
                   id={movie}
+                  onPress={() => this.showMovieDetail(movie)}
                 />
               ))
             }

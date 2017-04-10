@@ -6,6 +6,7 @@ import MovieList from './components/MovieList';
 import TVList from './components/TVList';
 import Likes from './components/Likes';
 import Search from './components/Search';
+import Detail from './components/Detail';
 
 const ListTabConfig = {
   tabBarPosition: 'top',
@@ -87,6 +88,12 @@ export const MainStack = StackNavigator({
           title: `${tabName} ${mainRouteName}`
         }
       }
+    }
+  },
+  Detail: {
+    screen: Detail,
+    navigationOptions: {
+      title: ({state}) => state.params.original_title || state.params.original_name
     }
   }
 })

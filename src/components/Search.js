@@ -22,6 +22,7 @@ class Search extends Component {
     super()
     this.searchBarTextInput = this.searchBarTextInput.bind(this)
     this.searchSubmit = this.searchSubmit.bind(this);
+    this.showSearchDetail = this.showSearchDetail.bind(this)
   }
 
   searchBarTextInput(text) {
@@ -32,6 +33,10 @@ class Search extends Component {
     const { movieList } = this.props.store;
     this.props.dispatch(searchSubmit(movieList.search, api.key))
   } 
+
+  showSearchDetail(show) {
+    this.props.navigation.navigate('Detail', show)
+  }
 
 
 
@@ -56,6 +61,7 @@ class Search extends Component {
                   key={movie.id}
                   uri={ movie.poster_path}
                   title={movie.original_title}
+                  onPress={() => this.showSearchDetail(movie)}
                 />
               ))
             }

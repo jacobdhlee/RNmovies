@@ -17,6 +17,15 @@ import Row from './common/Row';
 })
 
 class TVList extends Component {
+  constructor() {
+    super()
+    this.showTVDetail = this.showTVDetail.bind(this);
+  }
+
+  showTVDetail(tv) {
+    this.props.navigation.navigate('Detail', tv)
+  }
+
   render() {
     const { tvs } = this.props.movieList
     console.log('movie list is ', tvs.length)
@@ -30,6 +39,7 @@ class TVList extends Component {
                   key={tv.id}
                   uri={ tv.backdrop_path}
                   title={tv.name}
+                  onPress={() => this.showTVDetail(tv)}
                 />
               ))
             }
