@@ -7,6 +7,7 @@ import {
   SEARCH_SUBMIT_SUCCESS,
   FAVORITE_ADD,
   FAVORITE_REMOVIE,
+  SIMILAR_SEARCH_SUCCESS,
 } from './types'
 
 export const getMovieList = (api) => {
@@ -60,7 +61,7 @@ export const searchSubmit = (text, api) => {
       .then(res => res.json())
       .then(data => {
         dispatch({
-          type: SEARCH_SUBMIT_SUCCESS,
+          type: SIMILAR_SEARCH_SUCCESS,
           payload: data,
         })
       })
@@ -77,5 +78,43 @@ export const favoritAdd = (favorite) => {
   return {
     type: FAVORITE_ADD,
     payload: favorite
+  }
+}
+
+export const similarMovieSearch = (id, api) => {
+  return (dispatch) => {
+    fetch(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${api}`)
+      .then(res => res.json())
+      .then(data => {
+        dispatch({
+          type: SIMILAR_SEARCH_SUCCESS,
+          payload: data,
+        })
+      })
+      .catch((err) => {
+        dispatch({
+          type: LOADING_LIST_FAIL,
+          payload: err
+        })
+      })
+  }
+}
+
+export const similarTVSearch = (id, api) => {
+  return (dispatch) => {
+    fetch(`https://api.themoviedb.org/3/tv/${id}/similar?api_key=${api}`)
+      .then(res => res.json())
+      .then(data => {
+        dispatch({
+          type: SIMILAR_SEARCH_SUCCESS,
+          payload: data,
+        })
+      })
+      .catch((err) => {
+        dispatch({
+          type: LOADING_LIST_FAIL,
+          payload: err
+        })
+      })
   }
 }

@@ -7,6 +7,7 @@ import {
   SEARCH_SUBMIT_SUCCESS,
   FAVORITE_ADD,
   FAVORITE_REMOVIE,
+  SIMILAR_SEARCH_SUCCESS,
 } from '../actions/types'
 
 const INITIAL_STATE = {
@@ -16,6 +17,7 @@ const INITIAL_STATE = {
   searchList: [],
   error: '',
   favorite: [],
+  similar: [],
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -36,7 +38,10 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, searchList: [...action.payload.results]}
 
     case FAVORITE_ADD: 
-      return { ...state, favorite: [...action.payload]}
+      return { ...state, favorite: [...action.payload] }
+    
+    case SIMILAR_SEARCH_SUCCESS: 
+      return { ...state, similar: [...action.payload.results] }
 
     default:
       return { ...INITIAL_STATE }

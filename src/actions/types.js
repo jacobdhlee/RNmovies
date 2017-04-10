@@ -6,3 +6,4 @@ export const SEARCH_INPUT = 'search_input';
 export const SEARCH_SUBMIT_SUCCESS = 'search_submit_success';
 export const FAVORITE_ADD = 'favorite_add';
 export const FAVORITE_REMOVIE = 'favorite_remove';
+export const SIMILAR_SEARCH_SUCCESS = 'similar_search_success';
