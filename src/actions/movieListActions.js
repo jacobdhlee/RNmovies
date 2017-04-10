@@ -8,6 +8,7 @@ import {
   FAVORITE_ADD,
   FAVORITE_REMOVIE,
   SIMILAR_SEARCH_SUCCESS,
+  GET_TRAILER_ID,
 } from './types'
 
 export const getMovieList = (api) => {
@@ -107,6 +108,25 @@ export const similarTVSearch = (id, api) => {
       .then(data => {
         dispatch({
           type: SIMILAR_SEARCH_SUCCESS,
+          payload: data,
+        })
+      })
+      .catch((err) => {
+        dispatch({
+          type: LOADING_LIST_FAIL,
+          payload: err
+        })
+      })
+  }
+}
+
+export const getTrailerId = (show, id, api) => {
+  return (dispatch)  => {
+    fetch(`https://api.themoviedb.org/3/${show}/${id}/videos?api_key=${api}&language=en-US`)
+      .then(res => res.json())
+      .then(data => {
+        dispatch({
+          type: GET_TRAILER_ID,
           payload: data,
         })
       })

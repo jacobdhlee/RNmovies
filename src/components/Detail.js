@@ -4,12 +4,13 @@ import {
   Text,
   StyleSheet,
   ScrollView,
+  TouchableOpacity,
   Image,
   Dimensions,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { similarMovieSearch, similarTVSearch } from '../actions'
-import { Icon, List } from 'react-native-elements'
+import { similarMovieSearch, similarTVSearch, getTrailerId } from '../actions'
+import { Icon, List, Button } from 'react-native-elements'
 import api from '../../config/config';
 import ShowSimilar from './ShowSimilar';
 
@@ -30,8 +31,25 @@ class Detail extends Component {
 
   componentWillMount() {
     const { id, title } = this.props.navigation.state.params;
-    title ? this.props.dispatch(similarMovieSearch(id, api.key)) : this.props.dispatch(similarTVSearch(id, api.key))
+    if(title) {
+      this.props.dispatch(similarMovieSearch(id, api.key))
+      // this.props.dispatch(getTrailerId('movie' ,id, api.key))
+    } else {
+      this.props.dispatch(similarTVSearch(id, api.key))
+      // this.props.dispatch(getTrailerId('tv', id, api.key))
+    }
 
+  }
+
+  componentDidMount() {
+    const { id, title } = this.props.navigation.state.params;
+    if(title) {
+      // this.props.dispatch(similarMovieSearch(id, api.key))
+      this.props.dispatch(getTrailerId('movie' ,id, api.key))
+    } else {
+      // this.props.dispatch(similarTVSearch(id, api.key))
+      this.props.dispatch(getTrailerId('tv', id, api.key))
+    }
   }
 
   showDetail(show) {
@@ -42,7 +60,8 @@ class Detail extends Component {
     const { 
       poster_path, overview, release_date, title, vote_average, first_air_date, name
     } = this.props.navigation.state.params
-    const { similar } = this.props.store.movieList;
+    const { similar, id, error } = this.props.store.movieList;
+    console.log('fucking id ', id, ' error ', error);
     const titles = title ? title : name
     const release = release_date ? release_date.split('-') : first_air_date.split('-')
     return (
@@ -63,11 +82,29 @@ class Detail extends Component {
           <View style={styles.overview}>
             <Text style={{fontSize: 15}}>{overview}</Text>
           </View>
+
+          <View style={styles.buttonGroup}>
+            <Button
+              component={TouchableOpacity}
+              title="Trailer"
+              backgroundColor="green"
+              textStyle={{fontWeight: '600'}}
+              buttonStyle ={styles.buttonStyle}/>
+
+            <Button
+              component={TouchableOpacity}
+              icon={{name: 'favorite'}}
+              title='Like!'
+              backgroundColor="red"
+              textStyle={{fontWeight: '600'}}
+              buttonStyle ={styles.buttonStyle}/>
+          </View>
         </View>
 
-        <View>
-          <Text>Simular</Text>
+        <View style={styles.recommendation}>
+          <Text style={styles.recommendationText}>Recommendation</Text>
         </View>
+
         <List containerStyle={{flexDirection: 'row', flexWrap: 'wrap'}}>
           {
             similar.map((show) => (
@@ -120,6 +157,27 @@ const styles = StyleSheet.create({
     padding: 10,
     borderTopWidth: 0.5,
     borderBottomWidth: 0.5,
+  },
+  recommendation: {
+    height: 20,
+    marginTop: 5,
+    justifyContent: 'center',
+    paddingLeft: 10,
+  },
+  recommendationText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  buttonGroup: {
+    height: 40,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonStyle: { 
+    height: 30,
+    width: 150,
+    borderRadius: 10,
   }
 })
 

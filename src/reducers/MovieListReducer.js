@@ -8,6 +8,7 @@ import {
   FAVORITE_ADD,
   FAVORITE_REMOVIE,
   SIMILAR_SEARCH_SUCCESS,
+  GET_TRAILER_ID,
 } from '../actions/types'
 
 const INITIAL_STATE = {
@@ -15,9 +16,10 @@ const INITIAL_STATE = {
   tvs: [],
   search: '',
   searchList: [],
-  error: '',
   favorite: [],
   similar: [],
+  id: '',
+  error: '',
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -42,6 +44,9 @@ export default (state = INITIAL_STATE, action) => {
     
     case SIMILAR_SEARCH_SUCCESS: 
       return { ...state, similar: [...action.payload.results] }
+
+    case GET_TRAILER_ID: 
+      return { ...status, id: action.payload.results[0].id}
 
     default:
       return { ...INITIAL_STATE }
