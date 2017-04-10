@@ -9,7 +9,9 @@ import {
   FAVORITE_REMOVIE,
   SIMILAR_SEARCH_SUCCESS,
   GET_TRAILER_ID,
+  GET_TRAILER_FAIL,
 } from './types'
+import axios from 'axios';
 
 export const getMovieList = (api) => {
   return (dispatch) => {
@@ -120,19 +122,19 @@ export const similarTVSearch = (id, api) => {
   }
 }
 
-export const getTrailerId = (show, id, api) => {
-  return (dispatch)  => {
-    fetch(`https://api.themoviedb.org/3/${show}/${id}/videos?api_key=${api}&language=en-US`)
-      .then(res => res.json())
+export const getTrailerId = (type, id, api) => {
+  return (dispatch) => {
+    fetch(`https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${api}&language=en-US`)
+      .then((res) =>  res.json() )
       .then(data => {
         dispatch({
           type: GET_TRAILER_ID,
           payload: data,
         })
       })
-      .catch((err) => {
+      .catch(err => {
         dispatch({
-          type: LOADING_LIST_FAIL,
+          type: GET_TRAILER_FAIL,
           payload: err
         })
       })

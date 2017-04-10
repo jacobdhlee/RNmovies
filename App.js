@@ -16,7 +16,7 @@ export default class App extends React.Component {
 
   render() {
     const logger = createLogger();
-    const store = createStore(reducers, {}, applyMiddleware(logger, thunk))
+    const store = createStore(reducers, {} ,applyMiddleware(thunk, logger))
     return (
       <Provider store={store}>
         <MainStack />

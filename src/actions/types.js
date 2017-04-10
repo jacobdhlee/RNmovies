@@ -8,3 +8,4 @@ export const FAVORITE_ADD = 'favorite_add';
 export const FAVORITE_REMOVIE = 'favorite_remove';
 export const SIMILAR_SEARCH_SUCCESS = 'similar_search_success';
 export const GET_TRAILER_ID = 'get_trailer_id';
+export const GET_TRAILER_FAIL = 'get_trailer_fail';

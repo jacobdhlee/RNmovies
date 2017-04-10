@@ -9,6 +9,7 @@ import {
   FAVORITE_REMOVIE,
   SIMILAR_SEARCH_SUCCESS,
   GET_TRAILER_ID,
+  GET_TRAILER_FAIL,
 } from '../actions/types'
 
 const INITIAL_STATE = {
@@ -46,7 +47,10 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, similar: [...action.payload.results] }
 
     case GET_TRAILER_ID: 
-      return { ...status, id: action.payload.results[0].id}
+      return { ...status, id: action.payload.id }
+    
+    case GET_TRAILER_FAIL:
+      return { ...state, error: action.payload }
 
     default:
       return { ...INITIAL_STATE }
