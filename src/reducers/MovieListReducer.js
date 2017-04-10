@@ -19,7 +19,7 @@ const INITIAL_STATE = {
   searchList: [],
   favorite: [],
   similar: [],
-  id: '',
+  youtubeId: '',
   error: '',
 }
 
@@ -27,32 +27,33 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LOADING_LIST_SUCCESS:
       return { ...state, movies: [...action.payload.results] }
-    
+      
     case LOADING_LIST_FAIL:
       return { ...state, error: action.payload }
-    
+      
     case LOADING_TVLIST_SUCCESS:
       return { ...state, tvs: [...action.payload.results]  }
-
+      
     case SEARCH_INPUT:
       return { ...state, search: action.payload }
-
+      
     case SEARCH_SUBMIT_SUCCESS: 
       return { ...state, searchList: [...action.payload.results]}
-
+      
     case FAVORITE_ADD: 
       return { ...state, favorite: [...action.payload] }
-    
+      
     case SIMILAR_SEARCH_SUCCESS: 
       return { ...state, similar: [...action.payload.results] }
-
+      
     case GET_TRAILER_ID: 
-      return { ...status, id: action.payload.id }
-    
+      return { ...state, youtubeId: action.payload.results[0].id }
+      
     case GET_TRAILER_FAIL:
       return { ...state, error: action.payload }
-
+      
     default:
       return { ...INITIAL_STATE }
+      
   }
 } 

@@ -25,7 +25,6 @@ class Detail extends Component {
 
   constructor() {
     super()
-
     this.showDetail = this.showDetail.bind(this);
     this.trailer = this.trailer.bind(this);
   }
@@ -34,8 +33,10 @@ class Detail extends Component {
     const { id, title } = this.props.navigation.state.params;
     if(title) {
       this.props.dispatch(similarMovieSearch(id, api.key))
+      this.props.dispatch(getTrailerId('movie', id, api.key))
     } else {
       this.props.dispatch(similarTVSearch(id, api.key))
+      this.props.dispatch(getTrailerId('tv', id, api.key))
     }
 
   }
@@ -45,20 +46,14 @@ class Detail extends Component {
   }
 
   trailer() {
-    const { id, title } = this.props.navigation.state.params;
-    if(title) {
-      this.props.dispatch(getTrailerId('movie', id, api.key))
-    } else {
-      this.props.dispatch(getTrailerId('tv', id, api.key))
-    }
+    console.log('fuck')
   }
 
   render() {
     const { 
       poster_path, overview, release_date, title, vote_average, first_air_date, name
     } = this.props.navigation.state.params
-    const { similar, id, error } = this.props.store.movieList;
-    console.log('id >>>>>>>>>>>>>>  ', id)
+    const { similar, youtubeId } = this.props.store.movieList;
     const titles = title ? title : name
     const release = release_date ? release_date.split('-') : first_air_date.split('-')
     return (
