@@ -7,7 +7,6 @@ import {
 import Header from './common/Header'
 class Likes extends Component {
   render() {
-    // console.log('this props ', this.props.navigation.state.routeName)
     return (
       <View style={styles.container}>
         <View>

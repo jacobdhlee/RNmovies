@@ -10,7 +10,7 @@ import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 
 import reducers from './src/reducers';
-import { MainStack } from './src/Routes';
+import { MainStack, Root } from './src/Routes';
 
 export default class App extends React.Component {
 
@@ -19,7 +19,7 @@ export default class App extends React.Component {
     const store = createStore(reducers, {} ,applyMiddleware(thunk, logger))
     return (
       <Provider store={store}>
-        <MainStack />
+        <Root />
       </Provider>
     );
   }

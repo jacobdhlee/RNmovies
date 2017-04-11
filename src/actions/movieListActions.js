@@ -64,7 +64,7 @@ export const searchSubmit = (text, api) => {
       .then(res => res.json())
       .then(data => {
         dispatch({
-          type: SIMILAR_SEARCH_SUCCESS,
+          type: SEARCH_SUBMIT_SUCCESS,
           payload: data,
         })
       })

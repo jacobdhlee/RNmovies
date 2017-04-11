@@ -45,8 +45,9 @@ class Detail extends Component {
     this.props.navigation.navigate('Detail', show)
   }
 
-  trailer() {
-    console.log('fuck')
+  trailer(youtubeId, titles) {
+    const src = { name: titles, id: youtubeId }
+    this.props.navigation.navigate('Trailer', src);
   }
 
   render() {
@@ -82,7 +83,7 @@ class Detail extends Component {
               backgroundColor="green"
               textStyle={{fontWeight: '600'}}
               buttonStyle ={styles.buttonStyle}
-              onPress={this.trailer}/>
+              onPress={() => this.trailer(youtubeId, titles)}/>
 
             <Button
               component={TouchableOpacity}

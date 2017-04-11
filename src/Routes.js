@@ -7,6 +7,7 @@ import TVList from './components/TVList';
 import Likes from './components/Likes';
 import Search from './components/Search';
 import Detail from './components/Detail';
+import YoutubeTrailer from './components/YoutubeTrailer';
 
 const ListTabConfig = {
   tabBarPosition: 'top',
@@ -96,4 +97,25 @@ export const MainStack = StackNavigator({
       title: ({state}) => state.params.original_title || state.params.original_name
     }
   }
+})
+
+export const Trailer = StackNavigator({
+  Trailer: {
+    screen: YoutubeTrailer,
+    navigationOptions: {
+      title: ({state}) => state.params.name
+    }
+  }
+})
+
+export const Root = StackNavigator({
+  Main: {
+    screen: MainStack,
+  },
+  Trailer: {
+    screen: Trailer
+  }
+},{
+  mode: 'modal',
+  headerMode: 'none',
 })

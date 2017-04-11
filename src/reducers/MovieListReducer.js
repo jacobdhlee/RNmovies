@@ -47,7 +47,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, similar: [...action.payload.results] }
       
     case GET_TRAILER_ID: 
-      return { ...state, youtubeId: action.payload.results[0].id }
+      return { ...state, youtubeId: action.payload.results[1].key }
       
     case GET_TRAILER_FAIL:
       return { ...state, error: action.payload }
