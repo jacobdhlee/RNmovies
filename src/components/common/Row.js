@@ -23,11 +23,6 @@ const Row = ({onPress, title, uri}) => {
 }
 
 const styles = StyleSheet.create({
-  favoriteContainer: {
-    flex: 3,
-    alignItems: 'flex-end',
-    padding: 20,
-  },
   backgroundImage: {
     height: 150,
     marginVertical: 2,
@@ -35,6 +30,7 @@ const styles = StyleSheet.create({
   textBox: {
     flex: 7,
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: 'rgba(0,0,0,0)'
   },
   textStyle: {

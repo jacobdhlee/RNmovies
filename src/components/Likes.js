@@ -2,17 +2,54 @@ import React, { Component } from 'react';
 import { 
   View,
   Text,
+  ScrollView,
   StyleSheet,
 } from 'react-native';
-import Header from './common/Header'
+import { connect } from 'react-redux';
+import { List } from 'react-native-elements';
+import LikedMovie from './LikedMovie';
+import { removeFavorite } from '../actions'
+@connect(({movieList}) => {
+  return {
+    movieList
+  }
+})
+
 class Likes extends Component {
+  constructor() {
+    super()
+    this.showDetail = this.showDetail.bind(this);
+    this.removeShow = this.removeShow.bind(this);
+  }
+
+  showDetail(show){
+    this.props.navigation.navigate('Detail', show)
+  }
+
+  removeShow(show) {
+    this.props.dispatch(removeFavorite(show))
+  }
+
   render() {
+    const { favorite } = this.props.movieList;
+
     return (
-      <View style={styles.container}>
-        <View>
-          <Text>Movie List</Text>
-        </View>
-      </View>
+      <ScrollView style={styles.container}>
+        <List containerStyle={styles.listContainer}>
+          {
+            favorite.map((show) => (
+              <LikedMovie
+                onPress={() => this.showDetail(show)}
+                key={show.id}
+                title={show.title}
+                uri={ show.poster_path}
+                name={show.name}
+                onButtonPress={() => this.removeShow(show)}
+              />
+            ))
+          }
+        </List>
+      </ScrollView>
     )
   }
 }
@@ -20,7 +57,11 @@ class Likes extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ff9b77',
+  },
+  listContainer: {
+    flexDirection: 'row', 
+    flexWrap: 'wrap', 
+    backgroundColor: 'rgba(0,0,0,0)',
   }
 })
 

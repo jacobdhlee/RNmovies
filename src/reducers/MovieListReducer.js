@@ -54,7 +54,7 @@ export default (state = INITIAL_STATE, action) => {
 
     case FAVORITE_REMOVIE:
       let filteredMovie = state.favorite.filter(movie => {
-        return movie.id === action.payload.id
+        return movie.id !== action.payload.id
       })
       
       return { ...state, favorite: filteredMovie }
