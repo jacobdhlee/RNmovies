@@ -140,3 +140,17 @@ export const getTrailerId = (type, id, api) => {
       })
   }
 }
+
+export const addFavorite = (movie) => {
+  return {
+    type: FAVORITE_ADD,
+    payload: movie
+  }
+}
+
+export const removeFavorite = (movie) => {
+  return {
+    type: FAVORITE_REMOVIE,
+    payload: movie
+  }
+}

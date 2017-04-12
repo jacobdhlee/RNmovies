@@ -51,6 +51,16 @@ export default (state = INITIAL_STATE, action) => {
       
     case GET_TRAILER_FAIL:
       return { ...state, error: action.payload }
+
+    case FAVORITE_ADD: 
+      return { ...state, favorite: [...action.payload]}
+    
+    case FAVORITE_REMOVIE:
+      let filteredMovie = state.favorite.filter(movie => {
+        return movie.id === action.payload.id
+      })
+      
+      return { ...state, favorite: filteredMovie }
       
     default:
       return { ...INITIAL_STATE }

@@ -8,6 +8,7 @@ import {
   Image,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { addFavorite, removeFavorite } from '../../actions';
 const { height, width } = Dimensions.get('window');
 
 class Row extends Component {
@@ -17,10 +18,17 @@ class Row extends Component {
       fav: false,
     }
     this.addFavorite = this.addFavorite.bind(this);
+    this.removeFavorite = this.removeFavorite.bind(this);
   }
 
-  addFavorite() {
+  addFavorite(movie) {
     this.setState({ fav: !this.state.fav })
+    if(!this.state.fav) { this.removeFavorite(movie) }
+    else { this.props.dispatch(addFavorite(movie)) }
+  }
+
+  removeFavorite(movie) {
+    this.props.dispatch(removeFavorite(movie))
   }
 
 
