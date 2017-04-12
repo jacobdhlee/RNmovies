@@ -16,7 +16,7 @@ import axios from 'axios';
 
 export const getMovieList = (api) => {
   return (dispatch) => {
-    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${api}`)
+    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${api}`)
       .then(res => res.json())
       .then(data => {
         dispatch({
