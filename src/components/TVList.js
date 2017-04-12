@@ -28,7 +28,6 @@ class TVList extends Component {
 
   render() {
     const { tvs } = this.props.movieList
-    console.log('movie list is ', tvs.length)
     return (
       <View style={styles.container}>
         <ScrollView>

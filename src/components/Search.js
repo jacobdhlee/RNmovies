@@ -42,7 +42,6 @@ class Search extends Component {
 
   render() {
     const { movieList } = this.props.store;
-    console.log('movieList is ', movieList.searchList)
     const movies = movieList.searchList;
     return (
       <View>

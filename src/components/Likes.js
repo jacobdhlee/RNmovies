@@ -6,9 +6,9 @@ import {
   StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { List } from 'react-native-elements';
+import { List, SearchBar } from 'react-native-elements';
 import LikedMovie from './LikedMovie';
-import { removeFavorite } from '../actions'
+import { removeFavorite, likeSearchInput } from '../actions'
 @connect(({movieList}) => {
   return {
     movieList
@@ -18,8 +18,14 @@ import { removeFavorite } from '../actions'
 class Likes extends Component {
   constructor() {
     super()
+
+    this.state = {
+      search: ''
+    }
+
     this.showDetail = this.showDetail.bind(this);
     this.removeShow = this.removeShow.bind(this);
+    this.likeSearchSubmit = this.likeSearchSubmit.bind(this);
   }
 
   showDetail(show){
@@ -30,25 +36,55 @@ class Likes extends Component {
     this.props.dispatch(removeFavorite(show))
   }
 
-  render() {
-    const { favorite } = this.props.movieList;
+  likeSearchSubmit(text) {
+    this.setState({search: text})
+    this.props.dispatch(likeSearchInput(text))
+  } 
 
+  render() {
+    const { favorite, likeSearch } = this.props.movieList;
+    const { movieList } = this.props;
+
+    const favoriteList = (
+      <List containerStyle={styles.listContainer}>
+        {favorite.map((show) => (
+          <LikedMovie
+            onPress={() => this.showDetail(show)}
+            key={show.id}
+            title={show.title}
+            uri={ show.poster_path}
+            name={show.name}
+            onButtonPress={() => this.removeShow(show)}
+          />
+        ))}
+      </List>
+    )
+
+    const filteredList = (
+      <List containerStyle={styles.listContainer}>
+        {likeSearch.map((show) => (
+          <LikedMovie
+            onPress={() => this.showDetail(show)}
+            key={show.id}
+            title={show.title}
+            uri={ show.poster_path}
+            name={show.name}
+            onButtonPress={() => this.removeShow(show)}
+          />
+        ))}
+      </List>
+    )
     return (
       <ScrollView style={styles.container}>
-        <List containerStyle={styles.listContainer}>
-          {
-            favorite.map((show) => (
-              <LikedMovie
-                onPress={() => this.showDetail(show)}
-                key={show.id}
-                title={show.title}
-                uri={ show.poster_path}
-                name={show.name}
-                onButtonPress={() => this.removeShow(show)}
-              />
-            ))
-          }
-        </List>
+        <View>
+          <SearchBar
+            round
+            lightTheme
+            onChangeText={(text) => this.likeSearchSubmit(text)}
+            placeholder='Find movies that you added'
+            onFocus={this.onFocus}/>
+        </View>
+          {this.state.search.length > 0 ? filteredList : favoriteList}
       </ScrollView>
     )
   }

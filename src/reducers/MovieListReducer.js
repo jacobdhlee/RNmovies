@@ -10,6 +10,7 @@ import {
   SIMILAR_SEARCH_SUCCESS,
   GET_TRAILER_ID,
   GET_TRAILER_FAIL,
+  LIKE_SEARCH_INPUT,
 } from '../actions/types'
 
 const INITIAL_STATE = {
@@ -21,6 +22,7 @@ const INITIAL_STATE = {
   similar: [],
   youtubeId: '',
   error: '',
+  likeSearch: [],
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -58,6 +60,13 @@ export default (state = INITIAL_STATE, action) => {
       })
       
       return { ...state, favorite: filteredMovie }
+
+    case LIKE_SEARCH_INPUT:
+      let filteredFavMovie = state.favorite.filter(show => {
+        const title = show.title ? show.title : show.name
+        return title.indexOf(action.payload) > -1
+      })
+      return { ...state, likeSearch: filteredFavMovie }
       
     default:
       return { ...INITIAL_STATE }

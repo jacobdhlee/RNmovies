@@ -9,7 +9,6 @@ import {
 class YoutubeTrailer extends Component {
   render() {
     const { name, id } = this.props.navigation.state.params;
-    console.log('id is ', id)
     return (
       <WebView 
       style={{flex: 1}}

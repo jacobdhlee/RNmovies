@@ -9,3 +9,4 @@ export const FAVORITE_REMOVIE = 'favorite_remove';
 export const SIMILAR_SEARCH_SUCCESS = 'similar_search_success';
 export const GET_TRAILER_ID = 'get_trailer_id';
 export const GET_TRAILER_FAIL = 'get_trailer_fail';
+export const LIKE_SEARCH_INPUT = 'like_search_input';

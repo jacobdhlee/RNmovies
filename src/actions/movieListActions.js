@@ -10,6 +10,7 @@ import {
   SIMILAR_SEARCH_SUCCESS,
   GET_TRAILER_ID,
   GET_TRAILER_FAIL,
+  LIKE_SEARCH_INPUT,
 } from './types'
 import axios from 'axios';
 
@@ -152,5 +153,12 @@ export const removeFavorite = (movie) => {
   return {
     type: FAVORITE_REMOVIE,
     payload: movie
+  }
+}
+
+export const likeSearchInput = (text) => {
+  return {
+    type: LIKE_SEARCH_INPUT,
+    payload: text
   }
 }
