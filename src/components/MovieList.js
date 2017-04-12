@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { getMovieList, getTVList } from '../actions';
+import { getMovieList, getTVList, addFavorite, removeFavorite } from '../actions';
 import api from '../../config/config';
 
 import Row from './common/Row';
@@ -35,8 +35,7 @@ class MovieList extends Component {
   }
 
   render() {
-    const { movies } = this.props.movieList
-    const favColor = 'rgba(254,254,254,0.5)'
+    const { movies, favorite } = this.props.movieList
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -47,7 +46,6 @@ class MovieList extends Component {
                   key={movie.id}
                   uri={ movie.backdrop_path}
                   title={movie.original_title}
-                  color={favColor}
                   id={movie}
                   onPress={() => this.showMovieDetail(movie)}
                 />

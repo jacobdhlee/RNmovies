@@ -6,10 +6,12 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  Alert,
   Dimensions,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { similarMovieSearch, similarTVSearch, getTrailerId } from '../actions'
+import _ from 'underscore';
+import { similarMovieSearch, similarTVSearch, getTrailerId, addFavorite } from '../actions'
 import { Icon, List, Button } from 'react-native-elements'
 import api from '../../config/config';
 import ShowSimilar from './ShowSimilar';
@@ -22,11 +24,13 @@ const { width, height } = Dimensions.get('window');
   }
 })
 class Detail extends Component {
-
   constructor() {
     super()
+
+    this.favoriteAdd = this.favoriteAdd.bind(this);
     this.showDetail = this.showDetail.bind(this);
     this.trailer = this.trailer.bind(this);
+    
   }
 
   componentWillMount() {
@@ -50,10 +54,18 @@ class Detail extends Component {
     this.props.navigation.navigate('Trailer', src);
   }
 
+  favoriteAdd(movie) {
+    const { favorite } = this.props.store.movieList;
+    const find = _.find(favorite, (fav) => {
+      return fav.id === movie.id
+    })
+    find ? Alert.alert('Show has already added!') : this.props.dispatch(addFavorite(movie))
+  }
+
   render() {
     const { 
-      poster_path, overview, release_date, title, vote_average, first_air_date, name
-    } = this.props.navigation.state.params
+      poster_path, overview, release_date, title, vote_average, first_air_date, name, id,
+    } = this.props.navigation.state.params;
     const { similar, youtubeId } = this.props.store.movieList;
     const titles = title ? title : name
     const release = release_date ? release_date.split('-') : first_air_date.split('-')
@@ -91,7 +103,9 @@ class Detail extends Component {
               title='Like!'
               backgroundColor="red"
               textStyle={{fontWeight: '600'}}
-              buttonStyle ={styles.buttonStyle}/>
+              buttonStyle ={styles.buttonStyle}
+              onPress={() => this.favoriteAdd(this.props.navigation.state.params)}
+              />
           </View>
         </View>
 

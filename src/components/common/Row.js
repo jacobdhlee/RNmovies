@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -8,51 +8,18 @@ import {
   Image,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { addFavorite, removeFavorite } from '../../actions';
 const { height, width } = Dimensions.get('window');
 
-class Row extends Component {
-  constructor() {
-    super()
-    this.state = {
-      fav: false,
-    }
-    this.addFavorite = this.addFavorite.bind(this);
-    this.removeFavorite = this.removeFavorite.bind(this);
-  }
-
-  addFavorite(movie) {
-    this.setState({ fav: !this.state.fav })
-    if(!this.state.fav) { this.removeFavorite(movie) }
-    else { this.props.dispatch(addFavorite(movie)) }
-  }
-
-  removeFavorite(movie) {
-    this.props.dispatch(removeFavorite(movie))
-  }
-
-
-
-  render() {
-    const { onPress, title, uri, id } = this.props;
-    const { fav } = this.state;
-    const color = fav ? 'red' : 'rgba(254, 254, 254, 0.5)'
-    return (
-      <TouchableOpacity onPress={onPress}>
-          <Image source={{uri: `https://image.tmdb.org/t/p/w500/${uri}`}} style={styles.backgroundImage}>
-            <View style={styles.favoriteContainer}>
-              <TouchableOpacity onPress={this.addFavorite}>
-                <Icon name="favorite" size={25} color={color}/>
-              </TouchableOpacity>
-            </View>
-            
-            <View style={styles.textBox}>
-              <Text style={styles.textStyle}>{title}</Text>
-            </View>
-          </Image>
-      </TouchableOpacity>
-    )
-  }
+const Row = ({onPress, title, uri}) => {
+  return (
+    <TouchableOpacity onPress={onPress}>
+        <Image source={{uri: `https://image.tmdb.org/t/p/w500/${uri}`}} style={styles.backgroundImage}>
+          <View style={styles.textBox}>
+            <Text style={styles.textStyle}>{title}</Text>
+          </View>
+        </Image>
+    </TouchableOpacity>
+  )
 }
 
 const styles = StyleSheet.create({
