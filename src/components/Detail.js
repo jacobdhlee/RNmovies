@@ -90,7 +90,7 @@ class Detail extends Component {
 
           <View style={styles.buttonGroup}>
             <Button
-              component={TouchableOpacity}
+              Component={TouchableOpacity}
               title="Trailer"
               backgroundColor="green"
               textStyle={{fontWeight: '600'}}
@@ -98,7 +98,7 @@ class Detail extends Component {
               onPress={() => this.trailer(youtubeId, titles)}/>
 
             <Button
-              component={TouchableOpacity}
+              Component={TouchableOpacity}
               icon={{name: 'favorite'}}
               title='Like!'
               backgroundColor="red"
